@@ -6,22 +6,24 @@ export default function Hero() {
 
       <div className="relative z-10 text-center px-4 max-w-3xl mx-auto">
         <span className="inline-block px-4 py-1 bg-neon-cyan/10 text-neon-cyan rounded-full text-sm mb-6 border border-neon-cyan/20">
-          مطور ويب محترف
+          Frontend Developer
         </span>
 
-        <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-          أحول أفكارك <span className="gradient-text">لواقع رقمي</span>
+        <h1 className="text-4xl md:text-6xl font-bold mb-4 leading-tight">
+          مرحباً، أنا <span className="gradient-text">Ahmed Hany</span>
         </h1>
 
-        <p className="text-gray-400 text-lg mb-8">
-          متخصص في تطوير مواقع ويب حديثة وسريعة بأحدث التقنيات
+        <p className="text-xl text-gray-400 mb-4">
+          أحول أفكارك لواقع رقمي
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        <p className="text-gray-500 mb-2">📍 Cairo, Egypt</p>
+
+        <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
           <a href="#portfolio" className="px-6 py-3 bg-neon-cyan text-dark-800 font-bold rounded-lg hover:shadow-lg hover:shadow-neon-cyan/30 transition-all text-center">
             شاهد أعمالي
           </a>
-          <a href="#contact" className="px-6 py-3 border border-dark-600 text-white rounded-lg hover:border-neon-cyan transition-all text-center">
+          <a href="mailto:a7med7any2222@gmail.com" className="px-6 py-3 border border-dark-600 text-white rounded-lg hover:border-neon-cyan transition-all text-center">
             تواصل معي
           </a>
         </div>

@@ -1,22 +1,22 @@
 import { useState, useEffect, useRef } from "react";
+import { Menu, X } from "lucide-react";
 
 const links = [
-  { name: "الرئيسية", href: "#home", id: "home" },
-  { name: "خدماتي", href: "#services", id: "services" },
-  { name: "أعمالي", href: "#portfolio", id: "portfolio" },
-  { name: "عني", href: "#about", id: "about" },
-  { name: "تواصل", href: "#contact", id: "contact" },
+  { label: "الرئيسية", href: "#home" },
+  { label: "عني", href: "#about" },
+  { label: "أعمالي", href: "#portfolio" },
+  { label: "تواصل", href: "#contact" },
 ];
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("home");
+  const [open, setOpen] = useState(false);
+  const [active, setActive] = useState("#home");
   const navRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (navRef.current && !navRef.current.contains(e.target as Node)) {
-        setIsOpen(false);
+        setOpen(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -25,11 +25,11 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = links.map((l) => document.getElementById(l.id));
-      const scrollPos = window.scrollY + 150;
-      for (let i = sections.length - 1; i >= 0; i--) {
-        if (sections[i] && sections[i]!.offsetTop <= scrollPos) {
-          setActiveSection(links[i].id);
+      const sections = links.map((l) => l.href.slice(1));
+      for (const id of sections.reverse()) {
+        const el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top <= 150) {
+          setActive(`#${id}`);
           break;
         }
       }
@@ -39,38 +39,36 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav ref={navRef} className="fixed top-0 left-0 right-0 z-50 bg-dark-800/90 backdrop-blur-sm border-b border-dark-600">
+    <nav ref={navRef} className="fixed top-0 left-0 right-0 bg-dark-900/80 backdrop-blur-md z-50 border-b border-dark-700">
       <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-        <a href="#home" className="text-xl font-bold gradient-text">Dev<span className="text-neon-cyan">.</span></a>
+        <a href="#home" className="text-xl font-bold gradient-text">Portfolio</a>
 
-        <div className="hidden md:flex items-center gap-6">
-          {links.map((link) => (
-            <a key={link.name} href={link.href} className={`transition-colors ${activeSection === link.id ? "text-neon-cyan font-bold" : "text-gray-300 hover:text-neon-cyan"}`}>
-              {link.name}
-            </a>
+        <ul className="hidden md:flex items-center gap-6">
+          {links.map((l) => (
+            <li key={l.href}>
+              <a href={l.href} className={`transition-colors hover:text-neon-cyan ${active === l.href ? "text-neon-cyan" : "text-gray-400"}`}>
+                {l.label}
+              </a>
+            </li>
           ))}
-          <a href="#contact" className="px-4 py-2 bg-neon-cyan text-dark-800 rounded-lg font-bold hover:shadow-lg hover:shadow-neon-cyan/30 transition-all">
-            ابدأ مشروعك
-          </a>
-        </div>
+        </ul>
 
-        <button onClick={() => setIsOpen(!isOpen)} className="md:hidden text-white text-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-neon-cyan rounded" aria-label={isOpen ? "إغلاق" : "فتح"} aria-expanded={isOpen}>
-          {isOpen ? "✕" : "☰"}
+        <button onClick={() => setOpen(!open)} className="md:hidden text-white" aria-label="القائمة">
+          {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
       </div>
 
-      <div className={`md:hidden bg-dark-800 border-t border-dark-600 overflow-hidden transition-all duration-300 ${isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}`}>
-        <div className="px-4 py-4">
-          {links.map((link) => (
-            <a key={link.name} href={link.href} onClick={() => setIsOpen(false)} className={`block py-2 transition-colors ${activeSection === link.id ? "text-neon-cyan font-bold" : "text-gray-300 hover:text-neon-cyan"}`}>
-              {link.name}
-            </a>
+      {open && (
+        <ul className="md:hidden bg-dark-800 border-t border-dark-700 px-4 py-4 space-y-3">
+          {links.map((l) => (
+            <li key={l.href}>
+              <a href={l.href} onClick={() => setOpen(false)} className={`block transition-colors hover:text-neon-cyan ${active === l.href ? "text-neon-cyan" : "text-gray-400"}`}>
+                {l.label}
+              </a>
+            </li>
           ))}
-          <a href="#contact" onClick={() => setIsOpen(false)} className="block mt-4 px-4 py-2 bg-neon-cyan text-dark-800 rounded-lg font-bold text-center">
-            ابدأ مشروعك
-          </a>
-        </div>
-      </div>
+        </ul>
+      )}
     </nav>
   );
 }
