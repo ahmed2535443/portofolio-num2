@@ -8,7 +8,7 @@ export default function Contact() {
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
           <a href="https://mostaql.com/u/YOUR_USERNAME" target="_blank" rel="noopener noreferrer" className="px-6 py-3 bg-[#1fb953] text-white font-bold rounded-lg hover:scale-105 transition-transform text-center">مستقل</a>
           <a href="https://khamsat.com/u/YOUR_USERNAME" target="_blank" rel="noopener noreferrer" className="px-6 py-3 bg-[#ff6b35] text-white font-bold rounded-lg hover:scale-105 transition-transform text-center">خمسات</a>
-          <a href="mailto:your@email.com" className="px-6 py-3 border border-dark-600 text-white font-bold rounded-lg hover:border-neon-cyan transition-all text-center">الإيميل</a>
+          <a href="mailto:ahmed@example.com" className="px-6 py-3 border border-dark-600 text-white font-bold rounded-lg hover:border-neon-cyan transition-all text-center">الإيميل</a>
         </div>
 
         <footer className="border-t border-dark-600 pt-8">
