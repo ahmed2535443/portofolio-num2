@@ -7,6 +7,7 @@ const projects = [
     desc: "منصة تعليم البرمجة من الصفر إلى الاحتراف بالعربي. تعلم HTML, CSS, JavaScript, React, Next.js والمزيد مع مشاريع حقيقية وتمارين تفاعلية.",
     tags: ["Next.js", "Tailwind CSS", "Supabase", "Clerk"],
     category: "ويب",
+    image: "/images/codemaster.png",
     liveUrl: "https://my-blog-rho-flax.vercel.app/",
     githubUrl: "#",
   },
@@ -15,6 +16,7 @@ const projects = [
     desc: "منصة حلول رقمية ذكية للشركات. أتمتة العمليات، تحليلات لحظية، أمان عالٍ، وتوسعة مرنة مع دعم 24/7.",
     tags: ["Next.js", "Tailwind CSS", "React"],
     category: "ويب",
+    image: "/images/novaflow.png",
     liveUrl: "https://landing-nextjs-psi-six.vercel.app/",
     githubUrl: "#",
   },
@@ -23,6 +25,7 @@ const projects = [
     desc: "موقع بورتفوليو احترافي لمطور ويب مع تصميم عصري وأنيميشن سلسة.",
     tags: ["Vite", "React", "Tailwind CSS"],
     category: "ويب",
+    image: "/images/portfolio.png",
     liveUrl: "https://portofolio-num2.vercel.app/",
     githubUrl: "https://github.com/ahmed2535443/portofolio-num2",
   },
@@ -51,7 +54,12 @@ export default function Portfolio() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filtered.map((p, i) => (
             <div key={i} className="bg-dark-700 rounded-xl overflow-hidden border border-dark-600 hover:border-neon-cyan/50 transition-all group">
-              <div className="h-48 bg-gradient-to-br from-neon-cyan/20 to-neon-purple/20 relative">
+              <div className="h-48 overflow-hidden relative">
+                <img
+                  src={p.image}
+                  alt={`Screenshot of ${p.title}`}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                />
                 <div className="absolute inset-0 bg-dark-900/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
                   <a href={p.liveUrl} target="_blank" rel="noopener noreferrer" className="p-3 bg-neon-cyan rounded-lg text-dark-800 hover:scale-110 transition-transform" aria-label={`عرض مباشر ${p.title}`}><ExternalLink className="w-5 h-5" /></a>
                   <a href={p.githubUrl} target="_blank" rel="noopener noreferrer" className="p-3 bg-dark-600 rounded-lg text-white hover:scale-110 transition-transform" aria-label={`كود ${p.title}`}><Github className="w-5 h-5" /></a>
